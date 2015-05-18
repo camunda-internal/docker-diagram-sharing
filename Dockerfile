@@ -19,11 +19,13 @@ RUN install-packages.sh git wget curl zip unzip sudo ca-certificates nano lightt
 ADD conf/lighttpd.conf /etc/lighttpd/lighttpd.conf
 
 RUN mkdir -p /var/cache/lighttpd/compress/
+RUN /etc/init.d/lighttpd start && \
+	/etc/init.d/lighttpd stop
 
 RUN rm -R /var/www && \
 	git clone https://github.com/camunda-internal/camunda-diagram-sharing.git /var/www && \
-	mkdir -p /var/www/users && \
-    chmod -R 777 /var/www/users && \
+	mkdir -p /var/www/bpmn.io && \
+    chmod -R 777 /var/www/bpmn.io && \
 	chown -R www-data:www-data /var/www
 	
 
